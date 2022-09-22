@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+  <style>
+    .popup{
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      top: 0;
+      left: 0;
+    }
+    .popup-body {
+    min-height: 100%;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
+    margin: 50px auto;
+    }
+    .popup-content {
+      margin: auto;
+    background-color: #fff;
+    color: #000;
+    max-width: 800px;
+    padding: 30px;
+    position: relative;
+    top: 10px;
+    /* font-size: 20px; */
+    color: #000;
+    position: relative;
+    }
+    .close{
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      height: 20px;
+      width: 20px;
+    }
+    .popup-header{
+      background-color: aqua;
+    }
+    .popup-main{
+      background-color: blueviolet;
+    }
+    .popup-footer{
+      background-color: yellow;
+    }
+    *{
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    transition: all ease 1s;
+}
+
+.c-hamburger {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 96px;
+    height: 96px;
+    font-size: 0;
+    box-shadow: none;
+    cursor: pointer;
+    border: none;
+}
+.c-hamburger:focus{
+    outline: none;
+}
+.c-hamburger span{
+    display: block;
+    position: absolute;
+    top: 44px;
+    left: 18px;
+    right: 18px;
+    height: 8px;
+    background: #fff;
+}
+.c-hamburger span::before, .c-hamburger span::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    right: 18px;
+    height: 8px;
+    background: #fff;
+    content: "";
+}
+.c-hamburger span::before{
+    top: -20px;
+}
+.c-hamburger span::after{
+    bottom: -20px;
+}
+.container {
+}
+.c-hamburger-line{
+    background: red;
+}
+.c-hamburger-line span {
+    transition: background 0s 0.3s;
+}
+
+.c-hamburger-line span::before, .c-hamburger-line span::after{
+    transition-duration: 0.3s, 0.3s;
+    transition-delay: 0.3s, 0s;
+
+}
+
+.c-hamburger-line span::before{
+    transition-property: top, transform;
+}
+.c-hamburger-line span::after{
+    transition-property: bottom, transform;
+}
+
+.c-hamburger-line.is-active {
+    background: green;
+}
+
+.c-hamburger-line.is-active span {
+    background: none;
+}
+
+.c-hamburger-line.is-active span::before {
+    top: 0;
+    transform: rotate(-45deg);
+}
+.c-hamburger-line.is-active span::after {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+.c-hamburger-line.is-active span::before, .c-hamburger-line.is-active span::after {
+    transition-delay: 0s, 0.3s;
+}
+#menu {
+    width: 300px;
+    margin-left: -204px;
+    background: aqua;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    transition: all ease 1s;
+    z-index: 9999;
+}
+.container2{
+    max-width: 80%;
+    min-width: 1000px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.body-active {
+    margin-left: 300px;
+}
+
+#menu.nav-active {
+    margin-left: 0;
+}
+  </style>
+</head>
+<body>
+  <!-- <button id="myBtn">Open popup</button>
+  <div id="mypopup" class="popup">
+      <div class="popup-body">
+        <div class="popup-content">
+          <div class="popup-header">
+            <h2>popup Header</h2>
+            <span class="close">&times;</span>
+          </div>
+          <div class="popup-main">
+            <p>Some text in the popup Body</p>
+            <p>Some other text...</p>
+          </div>
+          <div class="popup-footer">
+            <h3>popup Footer</h3>
+          </div>
+        </div>
+      </div>
+  </div> -->
+  <div id="menu">
+    <button class="c-hamburger c-hamburger-line">
+      <span>Meny</span>
+    </button>
+  </div>
+
+  <div class="container2">
+    <main>
+      <h1>Hello!</h1>
+    </main>
+  </div>
+  <script>
+    let popup = document.getElementById('mypopup'),
+      popupToggle = document.getElementById('myBtn'),
+      popupClose = document.querySelector('.close');
+      popupToggle.onclick = function() {
+        popup.style.display="block";
+      };
+
+      popupClose.onclick = function() {
+        popup.style.display="none";
+      };
+
+      window.onclick = function(e) {
+        if(e.target == popup) {
+          popup.style.display="none";
+        }
+      }
+  </script>
+  <script>
+    document.querySelector('.c-hamburger').addEventListener('click', function(e){
+    e.preventDefault();
+    // this.classList.toggle('is-active');
+    if (this.classList.contains('is-active')){
+        this.classList.remove('is-active');
+        document.querySelector('#menu').classList.remove('nav-active');
+        document.body.classList.remove('body-active');
+    } else {
+        this.classList.add('is-active');
+        document.querySelector('#menu').classList.add('nav-active');
+        document.body.classList.add('body-active');
+    }
+})
+  </script>
+  <!-- <script src="js/script.js"></script>
+  <script src="script1.js"></script> -->
+</body>
+</html>
